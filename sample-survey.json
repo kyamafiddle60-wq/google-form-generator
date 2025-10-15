@@ -1,0 +1,81 @@
+{
+  "formTitle": "顧客満足度アンケート",
+  "formDescription": "サービスに関するご意見をお聞かせください。所要時間：約3分",
+  "settings": {
+    "collectEmail": false,
+    "allowResponseEditing": true,
+    "shuffleQuestions": false
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "short_answer",
+      "title": "お名前を教えてください",
+      "description": "ニックネームでも構いません",
+      "required": true
+    },
+    {
+      "id": "q2",
+      "type": "multiple_choice",
+      "title": "年齢層を選択してください",
+      "required": true,
+      "options": [
+        "10代",
+        "20代",
+        "30代",
+        "40代",
+        "50代",
+        "60代以上"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "checkbox",
+      "title": "興味のある分野を選んでください（複数選択可）",
+      "description": "最も関心のあるものを選択してください",
+      "required": false,
+      "options": [
+        "テクノロジー",
+        "ビジネス",
+        "デザイン",
+        "マーケティング",
+        "教育",
+        "エンターテイメント"
+      ],
+      "hasOther": true
+    },
+    {
+      "id": "q4",
+      "type": "linear_scale",
+      "title": "サービスの満足度を教えてください",
+      "required": true,
+      "scale": {
+        "min": 1,
+        "max": 5,
+        "minLabel": "非常に不満",
+        "maxLabel": "非常に満足"
+      }
+    },
+    {
+      "id": "q5",
+      "type": "dropdown",
+      "title": "どのようにして当サービスを知りましたか？",
+      "required": true,
+      "options": [
+        "インターネット検索",
+        "SNS",
+        "友人・知人の紹介",
+        "広告",
+        "その他"
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "paragraph",
+      "title": "ご意見・ご要望がありましたら自由にご記入ください",
+      "description": "サービス改善の参考にさせていただきます",
+      "required": false
+    }
+  ]
+}
+
