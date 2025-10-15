@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Google Form Generator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 500px;
+      min-height: 400px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+    }
+
+    .container {
+      padding: 20px;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #1a73e8;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #1a73e8;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      border: 2px dashed #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      background: #fafafa;
+    }
+
+    input[type="file"]:hover {
+      border-color: #1a73e8;
+      background: #f0f7ff;
+    }
+
+    button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    button:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .primary-button {
+      width: 100%;
+      background: #1a73e8;
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .primary-button:hover:not(:disabled) {
+      background: #1557b0;
+    }
+
+    .save-button {
+      background: #34a853;
+      color: white;
+      margin-top: 8px;
+      width: 100%;
+    }
+
+    .save-button:hover:not(:disabled) {
+      background: #2d8e47;
+    }
+
+    .help-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    .help-text a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+
+    .help-text a:hover {
+      text-decoration: underline;
+    }
+
+    .file-info {
+      margin-top: 12px;
+      padding: 12px;
+      background: linear-gradient(135deg, #e8f0fe 0%, #f0f7ff 100%);
+      border-radius: 4px;
+      border-left: 4px solid #1a73e8;
+      font-size: 13px;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .preview {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 10px;
+    }
+
+    .preview-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #1a73e8;
+    }
+
+    .preview-description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+
+    .preview-question {
+      padding: 12px;
+      border-left: 3px solid #1a73e8;
+      margin-bottom: 12px;
+      background: #fafafa;
+      border-radius: 4px;
+    }
+
+    .question-number {
+      font-size: 11px;
+      color: #666;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .question-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      margin: 5px 0;
+    }
+
+    .required {
+      color: #d93025;
+      margin-left: 3px;
+      font-weight: bold;
+    }
+
+    .question-description {
+      font-size: 12px;
+      color: #666;
+      margin: 5px 0;
+      font-style: italic;
+    }
+
+    .question-type {
+      font-size: 11px;
+      color: #1a73e8;
+      margin-top: 5px;
+      background: #e8f0fe;
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    .result {
+      text-align: center;
+    }
+
+    .form-link {
+      display: block;
+      margin: 15px 0;
+      padding: 12px;
+      background: #e8f0fe;
+      border-radius: 6px;
+      color: #1a73e8;
+      text-decoration: none;
+      word-break: break-all;
+      font-size: 13px;
+      border: 2px solid #1a73e8;
+      transition: all 0.3s;
+    }
+
+    .form-link:hover {
+      background: #d2e3fc;
+      transform: scale(1.02);
+    }
+
+    .copy-button {
+      background: #fbbc04;
+      color: #333;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .copy-button:hover {
+      background: #f9ab00;
+    }
+
+    .error-section {
+      background: #fce8e6;
+      border-left: 4px solid #d93025;
+    }
+
+    .error {
+      color: #d93025;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .status {
+      text-align: center;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-top: 10px;
+      font-weight: 500;
+      animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .status.success {
+      background: #e6f4ea;
+      color: #1e8e3e;
+      border: 1px solid #1e8e3e;
+    }
+
+    .status.error {
+      background: #fce8e6;
+      color: #d93025;
+      border: 1px solid #d93025;
+    }
+
+    .status.info {
+      background: #e8f0fe;
+      color: #1a73e8;
+      border: 1px solid #1a73e8;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📝 Google Form Generator</h1>
+    
+    <!-- 設定セクション -->
+    <div class="section" id="settingsSection">
+      <h2>⚙️ 設定</h2>
+      <div class="form-group">
+        <label for="apiUrl">Apps Script URL:</label>
+        <input type="text" id="apiUrl" placeholder="https://script.google.com/macros/s/.../exec">
+        <button class="save-button" id="saveSettings">💾 保存</button>
+      </div>
+      <p class="help-text">
+        Google Apps ScriptのデプロイURLを貼り付けてください。<br>
+        URLは「https://script.google.com/macros/s/」で始まります。
+      </p>
+    </div>
+    
+    <!-- ファイル選択セクション -->
+    <div class="section">
+      <h2>📁 JSONファイルを選択</h2>
+      <input type="file" id="fileInput" accept=".json">
+      <div id="fileInfo" class="file-info"></div>
+    </div>
+    
+    <!-- プレビューセクション -->
+    <div class="section" id="previewSection" style="display: none;">
+      <h2>👀 プレビュー</h2>
+      <div id="preview" class="preview"></div>
+    </div>
+    
+    <!-- アクションボタン -->
+    <div class="section">
+      <button id="createForm" class="primary-button" disabled>
+        🚀 フォームを作成
+      </button>
+    </div>
+    
+    <!-- 結果セクション -->
+    <div class="section" id="resultSection" style="display: none;">
+      <h2>✅ 作成完了</h2>
+      <div id="result" class="result"></div>
+    </div>
+    
+    <!-- エラーセクション -->
+    <div class="section error-section" id="errorSection" style="display: none;">
+      <h2>❌ エラー</h2>
+      <div id="error" class="error"></div>
+    </div>
+    
+    <!-- ステータス -->
+    <div id="status" class="status"></div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
