@@ -1,0 +1,153 @@
+{
+  "formTitle": "TabMaster Pro フィードバックフォーム",
+  "formDescription": "TabMaster Pro に関するご意見・ご要望をお寄せください。対象：ご利用中／ご利用開始予定のユーザーの皆さま。いただいた内容は品質改善と機能追加に活用します。",
+  "settings": {
+    "collectEmail": true,
+    "allowResponseEditing": true,
+    "shuffleQuestions": false
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "short_answer",
+      "title": "お名前（任意）",
+      "description": "",
+      "required": false
+    },
+    {
+      "id": "q2",
+      "type": "short_answer",
+      "title": "メールアドレス（任意）",
+      "description": "自動返信や回答の控え送付を希望する場合は入力してください。",
+      "required": false
+    },
+    {
+      "id": "q3",
+      "type": "date",
+      "title": "使用開始日",
+      "description": "TabMaster Pro を使い始めた日付",
+      "required": true
+    },
+    {
+      "id": "q4",
+      "type": "linear_scale",
+      "title": "全体的な満足度（1〜5）",
+      "description": "",
+      "required": true,
+      "scale": {
+        "min": 1,
+        "max": 5,
+        "minLabel": "不満",
+        "maxLabel": "非常に満足"
+      }
+    },
+    {
+      "id": "q5",
+      "type": "linear_scale",
+      "title": "使いやすさ（1〜5）",
+      "description": "",
+      "required": true,
+      "scale": {
+        "min": 1,
+        "max": 5,
+        "minLabel": "使いにくい",
+        "maxLabel": "とても使いやすい"
+      }
+    },
+    {
+      "id": "q6",
+      "type": "linear_scale",
+      "title": "デザイン（1〜5）",
+      "description": "",
+      "required": true,
+      "scale": {
+        "min": 1,
+        "max": 5,
+        "minLabel": "好みではない",
+        "maxLabel": "とても良い"
+      }
+    },
+    {
+      "id": "q7",
+      "type": "linear_scale",
+      "title": "機能の充実度（1〜5）",
+      "description": "",
+      "required": true,
+      "scale": {
+        "min": 1,
+        "max": 5,
+        "minLabel": "不足している",
+        "maxLabel": "とても充実"
+      }
+    },
+    {
+      "id": "q8",
+      "type": "paragraph",
+      "title": "良い点",
+      "description": "気に入っている点・役立った点",
+      "required": false
+    },
+    {
+      "id": "q9",
+      "type": "paragraph",
+      "title": "改善点",
+      "description": "改善してほしい点・困った点",
+      "required": false
+    },
+    {
+      "id": "q10",
+      "type": "paragraph",
+      "title": "要望する機能",
+      "description": "今後追加してほしい機能や使い方の提案",
+      "required": false
+    },
+    {
+      "id": "q11",
+      "type": "paragraph",
+      "title": "バグ報告",
+      "description": "再現手順・発生環境・頻度など分かる範囲でご記入ください",
+      "required": false
+    },
+    {
+      "id": "q12",
+      "type": "short_answer",
+      "title": "Chromeのバージョン",
+      "description": "例：126.0.6478.62（chrome://settings/help で確認）",
+      "required": false
+    },
+    {
+      "id": "q13",
+      "type": "multiple_choice",
+      "title": "使用OS",
+      "description": "",
+      "required": true,
+      "options": [
+        "Windows",
+        "Mac",
+        "Linux"
+      ]
+    },
+    {
+      "id": "q14",
+      "type": "multiple_choice",
+      "title": "インストール時の問題はありましたか？",
+      "description": "",
+      "required": true,
+      "options": [
+        "Yes",
+        "No"
+      ]
+    },
+    {
+      "id": "q15",
+      "type": "multiple_choice",
+      "title": "動作に問題はありましたか？",
+      "description": "クラッシュ、動作不良、表示崩れなど",
+      "required": true,
+      "options": [
+        "Yes",
+        "No"
+      ]
+    }
+  ]
+}

@@ -32,6 +32,46 @@ function setupEventListeners() {
   }
 }
 
+// URL設定セクションの表示切り替え
+function toggleUrlSection(isCollapsed) {
+  const urlInput = document.getElementById('apiUrl');
+  const saveButton = document.getElementById('saveSettings');
+  const urlEditButton = document.getElementById('toggleUrlEdit');
+  const helpText = document.querySelector('#settingsSection .help-text');
+  const urlDisplay = document.getElementById('urlDisplay');
+  
+  if (isCollapsed) {
+    // 折りたたみ表示（URLが設定済み状態）
+    urlInput.style.display = 'none';
+    saveButton.style.display = 'none';
+    helpText.style.display = 'none';
+    urlDisplay.style.display = 'block';
+    urlEditButton.style.display = 'block';
+    urlDisplay.innerHTML = `
+      <div class="url-display-content">
+        <span class="url-label">✅ Apps Script URL設定済み</span>
+        <span class="url-preview">${apiUrl.substring(0, 50)}...</span>
+      </div>
+    `;
+  } else {
+    // 編集表示
+    urlInput.style.display = 'block';
+    saveButton.style.display = 'block';
+    helpText.style.display = 'block';
+    urlDisplay.style.display = 'none';
+    urlEditButton.style.display = 'none';
+  }
+}
+
+// URL編集モードの切り替え
+function toggleUrlEdit() {
+  toggleUrlSection(false);
+  // 入力フィールドにフォーカス
+  setTimeout(() => {
+    document.getElementById('apiUrl').focus();
+  }, 100);
+}
+
 // 設定を保存
 async function saveSettings() {
   const url = document.getElementById('apiUrl').value.trim();
@@ -313,46 +353,6 @@ function hideResult() {
   document.getElementById('resultSection').style.display = 'none';
 }
 
-// URL設定セクションの表示切り替え
-function toggleUrlSection(isCollapsed) {
-  const urlInput = document.getElementById('apiUrl');
-  const saveButton = document.getElementById('saveSettings');
-  const urlEditButton = document.getElementById('toggleUrlEdit');
-  const helpText = document.querySelector('#settingsSection .help-text');
-  const urlDisplay = document.getElementById('urlDisplay');
-  
-  if (isCollapsed) {
-    // 折りたたみ表示（URLが設定済み状態）
-    urlInput.style.display = 'none';
-    saveButton.style.display = 'none';
-    helpText.style.display = 'none';
-    urlDisplay.style.display = 'block';
-    urlEditButton.style.display = 'block';
-    urlDisplay.innerHTML = `
-      <div class="url-display-content">
-        <span class="url-label">✅ Apps Script URL設定済み</span>
-        <span class="url-preview">${apiUrl.substring(0, 50)}...</span>
-      </div>
-    `;
-  } else {
-    // 編集表示
-    urlInput.style.display = 'block';
-    saveButton.style.display = 'block';
-    helpText.style.display = 'block';
-    urlDisplay.style.display = 'none';
-    urlEditButton.style.display = 'none';
-  }
-}
-
-// URL編集モードの切り替え
-function toggleUrlEdit() {
-  toggleUrlSection(false);
-  // 入力フィールドにフォーカス
-  setTimeout(() => {
-    document.getElementById('apiUrl').focus();
-  }, 100);
-}
-
 // ステータス表示
 function showStatus(message, type) {
   const status = document.getElementById('status');
@@ -366,4 +366,3 @@ function showStatus(message, type) {
     }, 5000);
   }
 }
-
